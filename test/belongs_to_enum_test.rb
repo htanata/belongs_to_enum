@@ -179,4 +179,12 @@ class BelongsToEnumTest < ActiveSupport::TestCase
     assert_equal 1, post.errors.size
     assert_match 'must be completed or ended', post.errors.full_messages[0]
   end
+
+  test "should be able to assign new status on the fly" do
+    task = Post.new
+    new_status = Status.new(:name => 'pending')
+    task.status = new_status
+
+    assert_equal new_status, task.status
+  end
 end
